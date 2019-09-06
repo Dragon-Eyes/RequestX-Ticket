@@ -1,0 +1,1 @@
+	<p><a href="<?php echo 'details?key=' . $key . '&action=comnew'; ?>">Neuer Kommentar&nbsp;&plus;</a></p>
