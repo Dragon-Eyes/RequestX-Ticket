@@ -17,7 +17,7 @@
 					$new_key = mysqli_insert_id($db);
 
 					// send mail
-                    $to = "christoph@dragoneyes.org";
+                    $to = SUPPORT_EMAIL;
                     $subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
                     $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
                     // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";

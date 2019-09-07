@@ -1,0 +1,45 @@
+CREATE TABLE users (
+  kp_user INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  name_first VARCHAR(255),
+  name_last VARCHAR(255),
+  name_abbr VARCHAR(31),
+  name_user VARCHAR(255),
+
+  email VARCHAR(255),
+  // apikey VARCHAR(63),
+  password_api CHAR(16),
+  password_hashed VARCHAR(255),
+  note VARCHAR(255),
+
+  flg_active BIT(1) DEFAULT 1,
+  flg_deleted BIT(1) DEFAULT 0,
+
+  utl_creation_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  utl_creation_user_kp INT(6) UNSIGNED,
+  utl_modification_ts TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  utl_modification_user_kp INT(6) UNSIGNED,
+
+  PRIMARY KEY (kp_user)
+);
+------------------------------------------------------
+ALTER TABLE users AUTO_INCREMENT=10001;
+
+// ALTER TABLE users ADD COLUMN apikey VARCHAR(63);
+ALTER TABLE users ADD COLUMN password_api CHAR(16);
+
+
+------------------------------------------------------
+
+ALTER TABLE users ADD INDEX index_name_user (name_user);
+
+------------------------------------------------------ Tests:
+ALTER TABLE users AUTO_INCREMENT=10;
+
+INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Christoph', 'Dunkake', 'CD', 'Christoph Dunkake', 'dunkake@medio-ingeno.ch');
+UPDATE users SET password_hashed='abc' WHERE kp_user='2' LIMIT 1;
+
+INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Christoph', 'Dunkake', 'CD', 'christoph', 'christoph@dragoneyes.org');
+INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Christoph', 'Dunkake', 'CD', 'christoph', 'dunkake@medio-ingeno.ch');
+
+SELECT kp_user, name_abbr FROM users WHERE flg_active = 1;

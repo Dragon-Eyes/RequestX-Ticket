@@ -1,0 +1,54 @@
+CREATE TABLE requests (
+  kp_request INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  description VARCHAR(255),
+  source INT(6) UNSIGNED,
+  entity INT(6) UNSIGNED,
+  category INT(6) UNSIGNED,
+  priority INT(6) UNSIGNED DEFAULT 31,
+  responsible INT(6) UNSIGNED,
+  status INT(6) UNSIGNED,
+  note VARCHAR(4095),
+
+  flg_deleted BIT(1) DEFAULT 0,
+  flg_archived BIT(1) DEFAULT 0,
+
+  utl_creation_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  utl_creation_user_kp INT(6) UNSIGNED,
+  utl_modification_ts TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  utl_modification_user_kp INT(6) UNSIGNED,
+
+  PRIMARY KEY (kp_request)
+);
+------------------------------------------------------
+
+After 1.2.5:
+ALTER TABLE requests ADD COLUMN priority INT(6) UNSIGNED DEFAULT 31;
+
+
+------------------------------------------------------ Tests:
+ALTER TABLE requests AUTO_INCREMENT=1000;
+ALTER TABLE requests ADD INDEX index_some (kf_some);
+  kf_some INT(11) UNSIGNED,
+
+ALTER TABLE requests ADD COLUMN flg_archived BIT(1) DEFAULT 0;
+
+ALTER TABLE requests ADD COLUMN utl_creation_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE requests DROP COLUMN utl_creation_ts;
+ALTER TABLE requests ADD COLUMN utl_modification_ts TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP;
+ALTER TABLE requests DROP COLUMN numb2;
+
+ALTER TABLE requests DROP COLUMN source;
+ALTER TABLE requests DROP COLUMN responsible;
+ALTER TABLE requests ADD COLUMN source INT(6);
+ALTER TABLE requests ADD COLUMN responsible INT(6);
+
+
+
+
+INSERT INTO requests (description, source, category, responsible, status, note, utl_creation_user) VALUES('Kanton GL: C-Bauteile werden nicht ins Tool synchronisiert', 'RA', 'Fehler Trio 2', 'MI-CD', 'erledigt', 'Test durch DD ist erfolgreich verlaufen', 'Christoph Dunkake');
+INSERT INTO requests (description, source, category, responsible, status, note, utl_creation_user) VALUES('E-Mail senden im FM: Unter senden ist der Bestätigungknopf (mit "Enter" zu bedienen) auf "Abbrechen" eingestellt -> soll: "Senden"', 'RA', 'Änderung', 'MI-CD', 'pendent', '[Geschätzter Aufwand: 0.5 Std.]', 'Christoph Dunkake');
+
+UPDATE requests SET description ='> Ausführungskontrolle; Abschluss: Daten von Dossiers mit Mängeln werden NICHT ins Tool übetragen, das PDF nicht generiert | Ausführungskontrolle; Abschluss: Daten von Dossiers mit Mängeln werden NICHT ins Tool übetragen, das PDF nicht generiert | Ausführungskontrolle; Abschluss: Daten von Dossiers mit Mängeln werden NICHT ins Tool übetragen, das PDF nicht generiert' WHERE kp_request='104';
+UPDATE requests SET source ='RA', category ='Fehler Prio 1' WHERE kp_request='102' LIMIT 1;
+UPDATE requests SET responsible ='CD', status ='pendent', utl_creation_user = 'Christoph Dunkake', utl_modification_user = 'Christoph Dunkake' WHERE kp_request='102' LIMIT 1;

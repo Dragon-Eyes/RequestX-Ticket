@@ -1,0 +1,51 @@
+CREATE TABLE selections (
+  kp_selection INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  list VARCHAR(31),
+  position INT(3) UNSIGNED,
+  text VARCHAR(63),
+  value VARCHAR(63),
+
+  flg_default BIT(1) DEFAULT 0,
+  flg_active BIT(1) DEFAULT 1,
+  flg_deleted BIT(1) DEFAULT 0,
+
+  utl_creation_ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  utl_creation_user_kp INT(6) UNSIGNED,
+  utl_modification_ts TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  utl_modification_user_kp INT(6) UNSIGNED,
+
+  PRIMARY KEY (kp_selection)
+);
+------------------------------------------------------
+ALTER TABLE selections AUTO_INCREMENT=20001;
+
+> v 1.2.0
+ALTER TABLE selections AUTO_INCREMENT=28;
+INSERT INTO selections (list, position, text) VALUES ('status', '5', 'gelÃ¶scht');
+ALTER TABLE selections AUTO_INCREMENT=30;
+
+after 1.2.5:
+INSERT INTO selections (list, position, text) VALUES ('priority', '1', 'niedrig');
+INSERT INTO selections (list, position, text) VALUES ('priority', '2', 'normal');
+INSERT INTO selections (list, position, text) VALUES ('priority', '3', 'hoch');
+
+
+
+------------------------------------------------------ Tests:
+
+INSERT INTO selections (list, position, text) VALUES ('status', '1', 'warten');
+INSERT INTO selections (list, position, text, flg_default) VALUES ('status', '2', 'offen', '1');
+INSERT INTO selections (list, position, text) VALUES ('status', '3', 'in Arbeit');
+INSERT INTO selections (list, position, text) VALUES ('status', '4', 'erledigt');
+
+INSERT INTO selections (list, position, text) VALUES ('category', '1', 'Fehler Prio 1 - Notfall');
+INSERT INTO selections (list, position, text) VALUES ('category', '2', 'Fehler Prio 2');
+INSERT INTO selections (list, position, text) VALUES ('category', '3', 'Fehler Prio 3');
+INSERT INTO selections (list, position, text) VALUES ('category', '4', 'Änderung');
+INSERT INTO selections (list, position, text) VALUES ('category', '5', 'Erweiterung');
+INSERT INTO selections (list, position, text, flg_default) VALUES ('category', '6', 'Sonstiges', '1');
+
+INSERT INTO selections (list, text) VALUES ('entity', 'RxT');
+
+INSERT INTO selections (list, text) VALUES ('entity', 'GP3');
