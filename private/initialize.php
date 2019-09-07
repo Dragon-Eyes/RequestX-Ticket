@@ -11,7 +11,10 @@
 	$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
 	define("WWW_ROOT", $doc_root);
 
+	require_once('db_credentials.php');
 	require_once('configuration.php');
+    require_once('meta.php');
+
 	require_once('functions.php');
 	require_once('functions_database.php');
 	require_once('functions_validation.php');
@@ -22,4 +25,3 @@
 	$db = db_connect();
 	$errors = [];
 	$message = [];
-?>

@@ -146,7 +146,7 @@
 	<p>Gross- und Kleinschreibung werden beim Passwort unterschieden.</p>
 
     <p>
-        <a href="https://github.com/Dragon-Eyes/RequestX-Ticket/blob/master/LICENSE" target="_blank">Request X Ticket 1.x is Open Source Software published under the MIT license.</a>
+        Request X Ticket 1.x is <a href="https://github.com/Dragon-Eyes/RequestX-Ticket/blob/master/LICENSE" target="_blank">Open Source Software</a> published under the MIT license.
     </p>
 
 </body>
