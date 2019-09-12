@@ -49,9 +49,9 @@
 		
 	</table>
 
-    <blockquote>
-        <a href="../api/index">Rest API &nbsp;&raquo;</a>
-    </blockquote>
+<!--    <blockquote>-->
+<!--        <a href="../api/index">Rest API &nbsp;&raquo;</a>-->
+<!--    </blockquote>-->
 
 </body>
 </html>

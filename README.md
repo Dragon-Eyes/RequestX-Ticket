@@ -1,4 +1,4 @@
-# RequestX-Ticket
+# Request X - Ticket
 Request X Ticketing application
 
 Procedural PHP 7 using mysqli
