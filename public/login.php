@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Login | ReqX</title>
     <link rel="canonical" href="https://<?php echo SUBDOMAIN; ?>.requestx.ch/login">
 	<link rel="stylesheet" href="styles/requestx.css">
 
@@ -28,126 +28,137 @@
 
 </head>
 <body>
-
 <?php require_once('../private/initialize.php'); ?>
-    
-    <h1>Request X - <?php echo PROJECT; ?></h1>
-    <p>Version <?php echo REQX_VERSION; ?> (<?php echo REQX_RELEASENO; ?>)</p>
-    
-    <?php
-	$usernameAttempted = '';
-	
-	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
-		$usernameAttempted = trim($_POST['name_user']);
-		$passwordAttempted = $_POST['password'];
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
-		// check if username and password are set
-		if(is_blank($usernameAttempted)) {
-			$errors[] = "Benutzername ist erforderlich";
-		}
-		if(is_blank($passwordAttempted)) {
-			$errors[] = "Passwort ist erforderlich";
-		}
-		if(!empty($errors)) {
-//			echo display_validation_errors($errors);
-		} else {
-		// process login
+<div id="pagecontainer">
+    <div id="pagecontainerheader">
+        <h1>Request X - <?php echo PROJECT; ?></h1>
+        <p>Version <?php echo REQX_VERSION; ?> (<?php echo REQX_RELEASENO; ?>)</p>
+    </div>
 
-//			echo $passwordAttempted;
-			$user = find_user_by_nameuser($usernameAttempted);
-			if($user) {
-//				echo $user['name_user'];
-				$passwordStored = $user['password_hashed'] ?? '';
-//				echo $user['password_hashed'];
+    <div id="pagecontainercontent" style="max-width: 450px; padding-top: 100px;">
+        <?php
+        $usernameAttempted = '';
 
-				// if stored password is empty store attempted
-				if($passwordStored === '') {
-					if(is_password_strong_enough($passwordAttempted)) {
-						$user['password_hashed'] = password_hash($passwordAttempted, PASSWORD_DEFAULT);
-						$result = update_password($user);
-						if( $result === true ) {
-//							echo 'successfully updates';
-							$result = log_in($user);
-							header("Location: index");
-//							exit;
-						} else {
-							$errors = $result;
-							echo 'Error DB: ' . $errors;
-						}
-						
-					} else {
-						$errors[] = "Das Passwort muss mindestens 6 Zeichen lang sein und aus Buchstaben und Zahlen bestehen";
-//						$tempuser = $usernameAttempted;
-					}
+        if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+            $usernameAttempted = trim($_POST['name_user']);
+            $passwordAttempted = $_POST['password'];
 
-				} elseif(password_verify($passwordAttempted, $passwordStored)) {
-//				} elseif($passwordAttempted === $passwordStored) {
-					// if successful, redirect
-//					echo 'SUCCESS<br>';
-//					$result = log_in($user);
-//					echo $_SESSION['user_kp'];
-					$result = log_in($user);
-					header("Location: index");
-				} else {
-					// if not successful, display POST values in form
-					$errors[] = "Log-in nicht erfolgreich (Passwort nicht korrekt)";
-				}
-				
-			} else {
-				// username not found
-				$errors[] = "Log-in nicht erfolgreich (Benutzer nicht vorhanden)";
-			}
-		}
-	}
+            // check if username and password are set
+            if(is_blank($usernameAttempted)) {
+                $errors[] = "Benutzername ist erforderlich";
+            }
+            if(is_blank($passwordAttempted)) {
+                $errors[] = "Passwort ist erforderlich";
+            }
+            if(!empty($errors)) {
+    //			echo display_validation_errors($errors);
+            } else {
+            // process login
+
+    //			echo $passwordAttempted;
+                $user = find_user_by_nameuser($usernameAttempted);
+                if($user) {
+    //				echo $user['name_user'];
+                    $passwordStored = $user['password_hashed'] ?? '';
+    //				echo $user['password_hashed'];
+
+                    // if stored password is empty store attempted
+                    if($passwordStored === '') {
+                        if(is_password_strong_enough($passwordAttempted)) {
+                            $user['password_hashed'] = password_hash($passwordAttempted, PASSWORD_DEFAULT);
+                            $result = update_password($user);
+                            if( $result === true ) {
+    //							echo 'successfully updates';
+                                $result = log_in($user);
+                                header("Location: index");
+    //							exit;
+                            } else {
+                                $errors = $result;
+                                echo 'Error DB: ' . $errors;
+                            }
+
+                        } else {
+                            $errors[] = "Das Passwort muss mindestens 6 Zeichen lang sein und aus Buchstaben und Zahlen bestehen";
+    //						$tempuser = $usernameAttempted;
+                        }
+
+                    } elseif(password_verify($passwordAttempted, $passwordStored)) {
+    //				} elseif($passwordAttempted === $passwordStored) {
+                        // if successful, redirect
+    //					echo 'SUCCESS<br>';
+    //					$result = log_in($user);
+    //					echo $_SESSION['user_kp'];
+                        $result = log_in($user);
+                        header("Location: index");
+                    } else {
+                        // if not successful, display POST values in form
+                        $errors[] = "Log-in nicht erfolgreich (Passwort nicht korrekt)";
+                    }
+
+                } else {
+                    // username not found
+                    $errors[] = "Log-in nicht erfolgreich (Benutzer nicht vorhanden)";
+                }
+            }
+        }
 
 
-	// display errors if any
-	echo display_validation_errors($errors);
+        // display errors if any
+        echo display_validation_errors($errors);
 
 
-		if(isset($_SESSION['user_kp'])) {
-			echo '<p>Logged in</p>';
-		}
-?>
-	
-	
-	<form action="<?php echo 'login'; ?>" method="post">
-		<dl>
-			<dt>Benutzername</dt>
-			<dd>
-				<input type="text" name="name_user" value="<?php echo $usernameAttempted; ?>" autofocus>
-			</dd>
-		</dl>
-		<dl>
-			<dt>Passwort</dt>
-			<dd>
-				<input type="password" name="password" id="userpw">
-			</dd>
-		</dl>
-		<div style="display: block; clear: left; padding: 30px 0 0 165px;">
-			<input type="checkbox" onclick="showpw()">Passwort anzeigen
-			<script>
-				function showpw() {
-					var x = document.getElementById("userpw");
-					if (x.type === "password") {
-						x.type = "text";
-					} else {
-						x.type = "password";
-					}
-				}
-			</script>
-		</div>
-		<div style="display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
-			<input type="submit" value="Einloggen" />
-		</div>
+            if(isset($_SESSION['user_kp'])) {
+                echo '<p>Logged in</p>';
+            }
+    ?>
 
-	</form>
 
-	<p>Gross- und Kleinschreibung werden beim Passwort unterschieden.</p>
+        <form action="<?php echo 'login'; ?>" method="post">
+            <dl>
+                <dt>Benutzername</dt>
+                <dd>
+                    <input type="text" name="name_user" value="<?php echo $usernameAttempted; ?>" autofocus>
+                </dd>
+            </dl>
+            <dl>
+                <dt>Passwort</dt>
+                <dd>
+                    <input type="password" name="password" id="userpw">
+                </dd>
+            </dl>
+            <div style="display: block; clear: left; padding: 30px 0 0 165px;">
+                <input type="checkbox" onclick="showpw()">Passwort anzeigen
+                <script>
+                    function showpw() {
+                        var x = document.getElementById("userpw");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
+                    }
+                </script>
+            </div>
+            <div style="display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
+                <input type="submit" value="Einloggen" />
+            </div>
 
-    <p>
-        Request X Ticket 1.x is <a href="https://github.com/Dragon-Eyes/RequestX-Ticket/blob/master/LICENSE" target="_blank">Open Source Software</a> published under the MIT license.
-    </p>
+        </form>
 
+        <p>Gross- und Kleinschreibung werden beim Passwort unterschieden.</p>
+    </div>
+
+    <footer id="pagecontainerfooter">
+        <p>Request X Ticket 1.x is <a href="https://github.com/Dragon-Eyes/RequestX-Ticket" target="_blank">Open Source Software</a> published under MIT license.</p>
+    </footer>
+
+</div> <!-- end pagecontainer -->
 </body>
 </html>
