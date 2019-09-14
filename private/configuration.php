@@ -19,4 +19,4 @@
     define("SUBDOMAIN", 'dev');
     define("PROJECT", 'Development');
 
-    define("SUPPORT_EMAIL", 'christoph@dragoneyes.org');
+    define("SUPPORT_EMAIL", 'kontakt@dragoneyes.software');
