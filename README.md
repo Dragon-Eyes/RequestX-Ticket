@@ -8,4 +8,4 @@ Please also adapt the "SUPPORT_EMAIL" in configuration.php
 
 Database tested: MariaDB 10
 
-The version in Master is working fine.
+The version in Master on working fine.
