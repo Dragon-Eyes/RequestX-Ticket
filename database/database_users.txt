@@ -37,6 +37,9 @@ ALTER TABLE users ADD INDEX index_name_user (name_user);
 ALTER TABLE users AUTO_INCREMENT=10;
 
 INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Christoph', 'Dunkake', 'CD', 'Christoph Dunkake', 'dunkake@medio-ingeno.ch');
+
+INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Martin', 'Kutter', 'MK', 'Martin Kutter', 'kutter@medio-ingeno.ch');
+INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Markus', 'Gaegauf', 'MG', 'Markus Gaegauf', 'gaegauf@medio-ingeno.ch');
 UPDATE users SET password_hashed='123' WHERE kp_user='2' LIMIT 1;
 
 INSERT INTO users (name_first, name_last, name_abbr, name_user, email) VALUES ('Christoph', 'Dunkake', 'CD', 'christoph', 'christoph@dragoneyes.org');

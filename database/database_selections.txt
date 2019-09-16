@@ -27,13 +27,13 @@ ALTER TABLE selections AUTO_INCREMENT=30;
 
 after 1.2.5:
 INSERT INTO selections (list, position, text) VALUES ('priority', '1', 'niedrig');
-INSERT INTO selections (list, position, text) VALUES ('priority', '2', 'normal');
+INSERT INTO selections (list, position, text, flg_default) VALUES ('priority', '2', 'normal', 1);
 INSERT INTO selections (list, position, text) VALUES ('priority', '3', 'hoch');
 
 
 
 ------------------------------------------------------ Tests:
-
+1 2 3 4 28
 INSERT INTO selections (list, position, text) VALUES ('status', '1', 'warten');
 INSERT INTO selections (list, position, text, flg_default) VALUES ('status', '2', 'offen', '1');
 INSERT INTO selections (list, position, text) VALUES ('status', '3', 'in Arbeit');
@@ -45,6 +45,15 @@ INSERT INTO selections (list, position, text) VALUES ('category', '3', 'Fehler P
 INSERT INTO selections (list, position, text) VALUES ('category', '4', 'Änderung');
 INSERT INTO selections (list, position, text) VALUES ('category', '5', 'Erweiterung');
 INSERT INTO selections (list, position, text, flg_default) VALUES ('category', '6', 'Sonstiges', '1');
+
+INSERT INTO selections (list, position, text) VALUES ('category', '1', 'Fehler');
+INSERT INTO selections (list, position, text) VALUES ('category', '2', 'Änderung');
+INSERT INTO selections (list, position, text) VALUES ('category', '3', 'Erweiterung');
+INSERT INTO selections (list, position, text, flg_default) VALUES ('category', '4', 'Sonstiges', '1');
+
+
+
+
 
 INSERT INTO selections (list, text) VALUES ('entity', 'RxT');
 
