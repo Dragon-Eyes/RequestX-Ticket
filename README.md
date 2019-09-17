@@ -9,3 +9,5 @@ Please also adapt the "SUPPORT_EMAIL" in configuration.php
 Database tested: MariaDB 10
 
 The version on Master is working fine.
+
+Helpful how-to if you want to contribute (it would be awesome!): https://github.com/MarcDiethelm/contributing/blob/master/README.md
