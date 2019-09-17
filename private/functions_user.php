@@ -169,6 +169,8 @@ function log_in($user) {
 //    $_SESSION['filter_requests'] = $selection_set;
 //    var_dump(debug_backtrace($selection_set));
 
+    setcookie('username', $user['name_user'], time() + 60*60*24*14, SUBDOMAIN . '.requestx.ch', '', true, false);
+
 	return true;
 }
 

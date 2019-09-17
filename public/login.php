@@ -124,13 +124,14 @@
             <dl>
                 <dt>Benutzername</dt>
                 <dd>
-                    <input type="text" name="name_user" value="<?php echo $usernameAttempted; ?>" autofocus>
+                    <?php if(is_blank($usernameAttempted)) { $usernameAttempted = $_COOKIE['username']; } ?>
+                    <input type="text" name="name_user" value="<?php echo $usernameAttempted; ?>" <?php if(is_blank($usernameAttempted)) { echo 'autofocus'; } ?>>
                 </dd>
             </dl>
             <dl>
                 <dt>Passwort</dt>
                 <dd>
-                    <input type="password" name="password" id="userpw">
+                    <input type="password" name="password" id="userpw" <?php if(!is_blank($usernameAttempted)) { echo 'autofocus'; } ?>>
                 </dd>
             </dl>
             <div style="display: block; clear: left; padding: 30px 0 0 165px;">
