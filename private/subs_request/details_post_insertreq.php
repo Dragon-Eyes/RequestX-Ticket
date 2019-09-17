@@ -18,7 +18,8 @@
 
 					// send mail
 //                    $to = SUPPORT_EMAIL;
-                    $to = '';
+                    $user = find_user_by_kp($_POST['responsible']);
+                    $to = $user['email'];
                     $subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
                     $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
                     // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
