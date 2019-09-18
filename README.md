@@ -10,4 +10,6 @@ Database tested: MariaDB 10
 
 The version on Master is working fine.
 
+[Dev / Demo instance](https://dev.requestx.ch)<br>User: "Demo"<br>Pw: "DragonClaw1"
+
 Helpful how-to if you want to contribute (it would be awesome!): https://github.com/MarcDiethelm/contributing/blob/master/README.md
