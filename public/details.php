@@ -37,7 +37,7 @@
             // new attachment
             // TODO: adapt to file upload
             require ('../private/subs_request/details_get_showreq.php');
-            require ('../private/subs_request/details_get_showcomnewfrm.php');
+            require ('../private/subs_request/details_get_showattnewfrm.php');
             require ('../private/subs_request/details_get_showcomlist.php');
 
          
@@ -57,15 +57,22 @@
 			require ('../private/subs_request/details_post_insertreq.php');
 			// redirect to show
 
-      
-      
+
+
       } elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['key']) && $_GET['action'] == 'comnew') {
 			// save new comment record to db
 
 //			echo 'POST comnew';
          require ('../private/subs_request/details_post_insertcom.php');
-            
-      } else {
+
+		} elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['key']) && $_GET['action'] == 'attnew') {
+            // save new comment/attachment record to db
+
+			echo 'POST attnew';
+			exit();
+            require ('../private/subs_request/details_post_insertatt.php');
+
+        } else {
 			// redirect to index
 			header("Location: index");
 		}
