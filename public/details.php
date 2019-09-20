@@ -15,7 +15,10 @@
 //			require('../private/subs_request/details_get_show.php');
          
          require ('../private/subs_request/details_get_showreq.php');
-			if (FEATURE_COMMENTS) {
+            if(FEATURE_ATTACHMENTS) { ?>
+                <button type="button"><a href="<?php echo 'details?key=' . $key . '&action=attnew'; ?>">Neuer Anhang&nbsp;&plus;</a></button>
+            <?php }
+			if(FEATURE_COMMENTS) {
 				include ('../private/subs_request/details_get_showcomnewbtn.php');
 				include ('../private/subs_request/details_get_showcomlist.php');
 			}
@@ -29,8 +32,14 @@
          require ('../private/subs_request/details_get_showcomnewfrm.php');
          require ('../private/subs_request/details_get_showcomlist.php');
 
-         
-         
+
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['key']) && $_GET['action'] == 'attnew') {
+            // new attachment
+            // TODO: adapt to file upload
+            require ('../private/subs_request/details_get_showreq.php');
+            require ('../private/subs_request/details_get_showcomnewfrm.php');
+            require ('../private/subs_request/details_get_showcomlist.php');
+
          
 		} elseif ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['key']) && $_GET['action'] == 'edit') {
 			// show request as form
