@@ -2,6 +2,8 @@
 
 <?php
 
+            // TODO: add attachment
+
 			$comment = [];
 			$comment['comment'] = trim($_POST['comment']) ?? '';
 			$comment['key'] = $_GET['key'] ?? '';
