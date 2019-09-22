@@ -4,6 +4,21 @@
 
             // TODO: add attachment
 
+echo '<pre>';
+print_r($_FILES['attachment']);
+// echo WWW_ROOT;
+echo $_FILES['attachment']['tmp_name'] . '/' . $_FILES['attachment']['name'] . '<br>';
+echo $_FILES['attachment']['name'];
+echo '</pre>';
+
+           if(isset($_FILES['attachment']['name'])) {
+//               move_uploaded_file($_FILES['attachment']['tmp_name'] . '/' . $_FILES['attachment']['name'], ROOT_WWW . '/files/' . $_FILES['attachment']['name']);
+               echo move_uploaded_file($_FILES['attachment']['tmp_name'] . '/' . $_FILES['attachment']['name'], '../../public/files/' . $_FILES['attachment']['name']);
+//               move_uploaded_file($_FILES['attachment']['tmp_name'] , '../../public/files/' . $_FILES['attachment']['name']);
+           }
+
+exit();
+
 			$comment = [];
 			$comment['comment'] = trim($_POST['comment']) ?? '';
 			$comment['key'] = $_GET['key'] ?? '';

@@ -11,6 +11,12 @@
 	$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
 	define("WWW_ROOT", $doc_root);
 
+
+	define("ROOT_FILE", substr(__DIR__, 0, strpos(__DIR__, '/private')));
+	define("ROOT_WWW", 'https://' . $_SERVER['HTTP_HOST']);
+
+
+
 	require_once('db_credentials.php');
 	require_once('configuration.php');
     require_once('meta.php');
