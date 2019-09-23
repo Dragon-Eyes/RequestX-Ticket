@@ -35,4 +35,7 @@ function url_for($script_path) {
 	return WWW_ROOT . $script_path;
 }
 
-?>
+function get_uid() {
+    $uid = md5(uniqid(microtime(), 1));
+    return $uid;
+}
