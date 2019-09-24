@@ -2,7 +2,7 @@
 
 <?php
 
-    if(is_blank(trim($_POST['comment'])) && !isset($_FILES['attachment']['name'])) {
+    if(is_blank(trim($_POST['comment'])) && is_blank($_FILES['attachment']['name'])) {
         // all empty
         header("Location: details?key=" . $_GET['key'] . "&action=show");
         exit;
@@ -11,7 +11,7 @@
     $comment = [];
     $comment['key'] = $_GET['key'] ?? '';
 
-    if(isset($_FILES['attachment']['name'])) {
+    if(!is_blank($_FILES['attachment']['name'])) {
         $fileNameNew = get_uid() . '.' . pathinfo($_FILES['attachment']['name'], PATHINFO_EXTENSION);
         move_uploaded_file($_FILES['attachment']['tmp_name'], 'files/' . $fileNameNew);
         $comment['attachment_filename'] = $fileNameNew;
