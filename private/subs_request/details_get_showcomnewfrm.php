@@ -1,4 +1,4 @@
-                <form action="<?php echo 'details?key=' . $key . '&action=comnew'; ?>" method="post" enctype="multipart/form-data"<?php // if(FEATURE_ATTACHMENTS) { echo ' enctype="multipart/form-data"'; } ?>>
+                <form action="<?php echo 'details?key=' . $key . '&action=comnew'; ?>" method="post"<?php if(FEATURE_ATTACHMENTS) { echo ' enctype="multipart/form-data"'; } ?>>
                     <fieldset style="background-color: #dddddd;">
                         <h2>Neuer Kommentar <?php if(FEATURE_ATTACHMENTS) { echo ' und / oder Anhang'; } ?></h2>
                         <dl>

@@ -98,15 +98,16 @@ function insert_request($request) {
 function insert_comment($comment) {
     global $db;
 
-	$errors = validate_comment($comment);
+/*	$errors = validate_comment($comment);
 	if(!empty($errors)) {
 		return $errors;
-	}
+	}*/
 
    $sql = "INSERT INTO comments ";
-   $sql .= "(comment, kf_request, utl_creation_user_kp) ";
+   $sql .= "(comment, attachment_filename, kf_request, utl_creation_user_kp) ";
    $sql .= "VALUES (";
    $sql .= "'" . db_escape($db, $comment['comment']) . "',";
+   $sql .= "'" . db_escape($db, $comment['attachment_filename']) . "',";
    $sql .= "'" . db_escape($db, $comment['key']) . "',";
 	$sql .= "'" . $_SESSION['kp_user'] . "'";
 	$sql .= ")";
@@ -151,6 +152,7 @@ function validate_request($request) {
 }
 
 function validate_comment($comment) {
+    // not needed any more
 	$errors = [];
 	
 	if (is_blank($comment['comment'])) {

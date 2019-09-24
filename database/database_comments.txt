@@ -3,6 +3,7 @@ CREATE TABLE comments (
 
   kf_request INT(11) UNSIGNED,
   comment VARCHAR(1023),
+  attachment_filename VARCHAR(63),
 
   flg_deleted BIT(1) DEFAULT 0,
 
@@ -15,6 +16,7 @@ CREATE TABLE comments (
 );
 ------------------------------------------------------
 ALTER TABLE comments AUTO_INCREMENT=1000000001;
+ALTER TABLE comments ADD COLUMN attachment_filename VARCHAR(63);
 
 
 ------------------------------------------------------ Tests:
