@@ -28,6 +28,8 @@
 	require_once('functions_request.php');
 	require_once('functions_selection.php');
 
+	require_once('mail.class.php');
+
 	$db = db_connect();
 	$errors = [];
 	$message = [];
