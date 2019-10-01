@@ -63,6 +63,7 @@ class Mail {
         // create record
         $curl = curl_init();
         $bodytext = str_replace("\n", "\\n", $this->body);
+        $clientsystem = "ReqX Ticket - " . PROJECT;
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://intra.dragoneyes.solutions/fmi/data/v1/databases/CUBApost/layouts/mail/records",
             CURLOPT_RETURNTRANSFER => true,
@@ -73,7 +74,7 @@ class Mail {
             CURLOPT_CUSTOMREQUEST => "POST",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"some\\nbody\"\n  } \n}",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"$bodytext\"\n  } \n}",
-            CURLOPT_POSTFIELDS => "{\"fieldData\": {\"Recipient\": \"$this->recipient\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
+            CURLOPT_POSTFIELDS => "{\"fieldData\": {\"ClientSystem\": \"$clientsystem\", \"Recipient\": \"$this->recipient\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
                 "cache-control: no-cache",

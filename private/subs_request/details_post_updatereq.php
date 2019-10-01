@@ -31,14 +31,22 @@
                         // send mail to requester if status changes to erledigt
                         $to = find_useremail_by_kp($request['source']);
                         if(isset($to)) {
-                            $subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
-                            $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
-                            // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
-                            $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";
-                            if (DEBUG_MODE) {
-                                $headers .= 'Bcc: christoph@dragoneyes.org' . "\r\n";
+                            if(FEATURE_MESSAGESERVICE) {
+                                $mail = new Mail();
+                                $mail->recipient = $to;
+                                $mail->subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
+                                $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
+                                $mail->send();
+                            } else {
+                                $subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
+                                $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
+                                // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
+                                $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";
+                                if (DEBUG_MODE) {
+                                    $headers .= 'Bcc: christoph@dragoneyes.org' . "\r\n";
+                                }
+                                mail($to, $subject, $message, $headers);
                             }
-                            mail($to, $subject, $message, $headers);
                         }
                     }
 
