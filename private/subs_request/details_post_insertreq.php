@@ -17,17 +17,25 @@
 					$new_key = mysqli_insert_id($db);
 					if(FEATURE_NOTIFICATIONS) {
                         // send mail
-//                    $to = SUPPORT_EMAIL;
                         $user = find_user_by_kp($_POST['responsible']);
-                        $to = $user['email'];
-                        $subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
-                        $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
-                        // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
-                        $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";
-                        if (DEBUG_MODE) {
-                            // $headers .= 'Bcc: christoph@dragoneyes.org' . "\r\n";
+                        if(FEATURE_MESSAGESERVICE) {
+					        $mail = new Mail();
+					        $mail->recipient = $user['email'];
+					        $mail->subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
+					        $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
+					        $mail->send();
+                        } else {
+                            //                    $to = SUPPORT_EMAIL;
+                            $to = $user['email'];
+                            $subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
+                            $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
+                            // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
+                            $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";
+                            if (DEBUG_MODE) {
+                                // $headers .= 'Bcc: christoph@dragoneyes.org' . "\r\n";
+                            }
+                            mail($to, $subject, $message, $headers);
                         }
-                        mail($to, $subject, $message, $headers);
                     }
                     header("Location: details?key=" . $new_key . "&action=show");
 					exit;

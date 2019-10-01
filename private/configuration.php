@@ -7,6 +7,7 @@
     define("FEATURE_ENTITIES", true);
     define("FEATURE_NOTIFICATIONS", true);
     define("FEATURE_ATTACHMENTS", true);
+    define("FEATURE_MESSAGESERVICE", true);
 
     // alternative with constance array (7+)
 /*    define('FEATURE', [
