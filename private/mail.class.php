@@ -3,6 +3,7 @@
 class Mail {
 
     public $recipient;
+    public $replyto;
     public $subject;
     public $body;
 
@@ -74,7 +75,7 @@ class Mail {
             CURLOPT_CUSTOMREQUEST => "POST",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"some\\nbody\"\n  } \n}",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"$bodytext\"\n  } \n}",
-            CURLOPT_POSTFIELDS => "{\"fieldData\": {\"ClientSystem\": \"$clientsystem\", \"Recipient\": \"$this->recipient\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
+            CURLOPT_POSTFIELDS => "{\"fieldData\": {\"ClientSystem\": \"$clientsystem\", \"Recipient\": \"$this->recipient\", \"ReplyTo\": \"$this->replyto\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
                 "cache-control: no-cache",

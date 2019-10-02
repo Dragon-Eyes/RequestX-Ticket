@@ -18,11 +18,20 @@
 					if(FEATURE_NOTIFICATIONS) {
                         // send mail
                         $user = find_user_by_kp($_POST['responsible']);
+                        $sender = find_user_by_kp($_POST['source']);
                         if(FEATURE_MESSAGESERVICE) {
 					        $mail = new Mail();
 					        $mail->recipient = $user['email'];
+                            $mail->replyto = $sender['email'];
 					        $mail->subject = "Neues Ticket [" . SUBDOMAIN . " " . $new_key . "]";
 					        $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
+
+//					        echo '<pre>';
+//					        print_r($mail);
+//					        echo '</pre>';
+//					        exit();
+
+
 					        $mail->send();
                         } else {
                             //                    $to = SUPPORT_EMAIL;

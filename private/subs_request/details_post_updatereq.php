@@ -30,10 +30,12 @@
 					if(FEATURE_NOTIFICATIONS && $request['status'] == 4 && $statusOld != 4) {
                         // send mail to requester if status changes to erledigt
                         $to = find_useremail_by_kp($request['source']);
+                        $sender = find_useremail_by_kp($request['responsible']);
                         if(isset($to)) {
                             if(FEATURE_MESSAGESERVICE) {
                                 $mail = new Mail();
                                 $mail->recipient = $to;
+                                $mail->replyto = $sender;
                                 $mail->subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
                                 $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
                                 $mail->send();
