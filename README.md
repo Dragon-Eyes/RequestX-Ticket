@@ -7,12 +7,12 @@ Procedural PHP 7 using mysqli
 You need to create a db_credentials.php from db_credentials_template.php to provide your own database credentials.
 Please also adapt the "SUPPORT_EMAIL" in configuration.php
 
-##Notifications
+## Notifications
 E-mail notifications are send
 * when a new ticket is created (to the responsible) and
 * when the status is changed to done (to the requester)
 
-##Compatability
+## Compatability
 Database tested: MariaDB 10
 
 The version on Master is working fine.
