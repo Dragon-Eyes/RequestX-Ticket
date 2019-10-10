@@ -119,10 +119,16 @@ class Mail {
                 echo "cURL Error #:" . $err;
             } else {
 //            echo $response;
+                $responseObject = json_decode($response);
+                $error = $responseObject->message->code;
             }
-            $_SESSION['message'] = 'Die Benachrichtigung an ' . $this->recipient . ' wurde verschickt.';
+            if($error == 0) {
+                $_SESSION['message'] = 'Die Benachrichtigung an ' . $this->recipient . ' wurde verschickt.';
+            } else {
+                $_SESSION['message'] = 'Die Benachrichtigung an ' . $this->recipient . ' konnte NICHT verschickt werden (send).';
+            }
         } else {
-            $_SESSION['message'] = 'Die Benachrichtigung an ' . $this->recipient . ' konnte NICHT verschickt werden.';
+            $_SESSION['message'] = 'Die Benachrichtigung an ' . $this->recipient . ' konnte NICHT verschickt werden (create).';
         }
 
 
