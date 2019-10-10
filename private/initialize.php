@@ -27,6 +27,7 @@
 	require_once('functions_user.php');
 	require_once('functions_request.php');
 	require_once('functions_selection.php');
+	require_once('functions_api.php');
 
 	require_once('mail.class.php');
 

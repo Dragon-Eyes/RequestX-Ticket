@@ -1,4 +1,4 @@
-<?php
+<?php require_once('../../private/initialize.php');
 
     header('Access-Control-Allow: *');
     header('Content-Type: application/json');
@@ -6,4 +6,14 @@
 
     // return all tickets
 
-    echo 'Test';
+
+
+    $return = array(
+        "success" => true,
+        "response" => array(
+            "name" => 'Georg',
+            "age" => 34
+        )
+    );
+
+    echo json_encode($return);
