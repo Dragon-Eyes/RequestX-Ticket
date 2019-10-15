@@ -16,16 +16,35 @@
 			$request['responsible'] = $_POST['responsible'] ?? '';
 			$request['status'] = $_POST['status'] ?? '';
 			$request['note'] = $_POST['note'] ?? '';
-			if(FEATURE_NOTIFICATIONS && $request['status'] == 4) {
-                // get old status
+
+                // get old version
                 $requestOld = find_request_by_kp($key);
-			    $statusOld = $requestOld['status'];
-            }
-
-
+                $statusOld = $requestOld['status'];
+                $responsibleOld = $requestOld['responsible'];
+                // update request
 				$result = update_request($request);
+
 				if( $result === true ) {
 					$_SESSION['message'] = 'Das Ticket wurde geändert.';
+
+					if(FEATURE_NOTIFICATIONS && $request['status'] <> 4 && $responsibleOld != $request['responsible']) {
+                        // send mail to responsible if changed
+                        $to = find_useremail_by_kp($request['responsible']);
+                        $sender = find_useremail_by_kp($request['source']);
+                        if(FEATURE_MESSAGESERVICE) {
+                            $mail = new Mail();
+                            $mail->recipient = $to;
+                            $mail->replyto = $sender;
+                            $mail->subject = "Neues Ticket [" . SUBDOMAIN . " " . $key . "]";
+                            $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
+                            $mail->send();
+                        } else {
+                            $subject = "Neues Ticket [" . SUBDOMAIN . " " . $key . "]";
+                            $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $new_key . "&action=show";
+                            $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";
+                            mail($to, $subject, $message, $headers);
+                        }
+                    }
 
 					if(FEATURE_NOTIFICATIONS && $request['status'] == 4 && $statusOld != 4) {
                         // send mail to requester if status changes to erledigt
