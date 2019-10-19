@@ -2,6 +2,7 @@
 			$key = $_GET['key'];
 			$user = find_user_by_kp($key);
 			$pwreset = $_GET['pwreset'] === 'true';
+            $apikeyreset = $_GET['apikeyreset'] === 'true';
 ?>
 
 				<a href="<?php echo 'index'; ?>">Abbrechen&nbsp;&raquo;</a>
@@ -61,8 +62,28 @@
 						}
 					}
 
+                    if($apikeyreset) {
+
+                        $result = new_apikey($key);
+
+                        if( $result === true ) {
+                            header('Location: details?key=' . $key . '&action=edit');
+                            exit;
+                        } else {
+                            $errors = $result;
+                            echo 'Error DB: ' . $errors;
+                        }
+                    } ?>
+
+					<dl>
+                        <dt>API-Key</dt>
+                        <dd><?php echo h($user['apikey']); ?></dd>
+                        <dd><a href='details?key=<?php echo $key; ?>&action=edit&apikeyreset=true'>Neuen Key erzeugen&nbsp;&raquo;</a></dd>
+                    </dl><br />
+
+                    <?php
 					if(isset($user['password_hashed'])) {
-						echo '<p>Wenn Sie das Passwort eines Benutzers zurücksetzen, wird das Passowort des Benutzers in der Datenbank gelöscht und, wie bei neuen Benutzern, wird das Passwort, das der Benutzer beim ersten Login eingibt, verschlüsselt gespeichert und ist für spätere Logins notwendig.</p>
+						echo '<p>Wenn Sie das Passwort eines Benutzers zurücksetzen, wird das Passwort des Benutzers in der Datenbank gelöscht und, wie bei neuen Benutzern, wird das Passwort, das der Benutzer beim ersten Login eingibt, verschlüsselt gespeichert und ist für spätere Logins notwendig.</p>
 						<a href=';
 							echo 'details?key=' . $key . '&action=edit&pwreset=true>Passwort zurücksetzen&nbsp;&raquo;</a>';
 					} else {

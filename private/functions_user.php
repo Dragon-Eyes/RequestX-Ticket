@@ -59,6 +59,16 @@ function find_user_by_nameuser($name_user) {
 	return $request;
 }
 
+function find_user_by_apikey($apikey) {
+    global $db;
+    $sql = "SELECT * FROM users ";
+    $sql .= "WHERE apikey = '" . $apikey . "' ";
+//	$sql .= "AND flg_active = 1";
+    $result = mysqli_query($db, $sql);
+    $request = mysqli_fetch_assoc($result);
+    return $request;
+}
+
 function validate_user($user) {
 	$errors = [];
 
@@ -105,6 +115,20 @@ function delete_password($key) {
 	$sql .= "LIMIT 1";
 	$result = mysqli_query($db, $sql);
 	return $result;
+}
+
+function new_apikey($key) {
+    global $db;
+
+    $sql = "UPDATE users SET ";
+    $sql .= "apikey='" . get_uid() . "', ";
+    $sql .= "utl_modification_user_kp='" . $_SESSION['kp_user'] . "' ";
+
+    $sql .= "WHERE kp_user='" . $key . "' ";
+    $sql .= "LIMIT 1";
+
+    $result = mysqli_query($db, $sql);
+    return $result;
 }
 
 function update_user($user) {
