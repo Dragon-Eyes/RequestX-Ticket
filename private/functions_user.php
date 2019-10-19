@@ -59,6 +59,16 @@ function find_user_by_nameuser($name_user) {
 	return $request;
 }
 
+function find_user_by_apikey($apikey) {
+    global $db;
+    $sql = "SELECT * FROM users ";
+    $sql .= "WHERE apikey = '" . $apikey . "' ";
+//	$sql .= "AND flg_active = 1";
+    $result = mysqli_query($db, $sql);
+    $request = mysqli_fetch_assoc($result);
+    return $request;
+}
+
 function validate_user($user) {
 	$errors = [];
 
