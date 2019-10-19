@@ -107,6 +107,20 @@ function delete_password($key) {
 	return $result;
 }
 
+function new_apikey($key) {
+    global $db;
+
+    $sql = "UPDATE users SET ";
+    $sql .= "apikey='" . get_uid() . "', ";
+    $sql .= "utl_modification_user_kp='" . $_SESSION['kp_user'] . "' ";
+
+    $sql .= "WHERE kp_user='" . $key . "' ";
+    $sql .= "LIMIT 1";
+
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
 function update_user($user) {
 	global $db;
 	
