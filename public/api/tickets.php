@@ -1,10 +1,20 @@
 <?php require_once('../../private/initialize.php');
 
 header("Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+// header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+header("Access-Control-Allow-Methods: GET");
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
-header("WWW-Authenticate: Basic realm=\"My Realm\"");
+// header("WWW-Authenticate: Basic realm=\"My Realm\"");
+
+if(!FEATURE_API) {
+    http_response_code(410);
+    echo json_encode(array(
+        "success" => false,
+        "message" => "Service not enabled"
+    ));
+    exit();
+}
 
 // $a = base64_decode( substr($_SERVER["REMOTE_USER"],6)) ;
 // list($name, $password) = explode(':', $a);
