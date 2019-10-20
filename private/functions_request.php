@@ -50,6 +50,29 @@ function find_requests_by_status() {
     return $result;
 }
 
+function find_requests_by_availability_and_user($userkp) {
+    global $db;
+
+    // done in different function
+//    $sql = "SELECT kp_user FROM users ";
+//    $sql .= "WHERE name_user = '" . $username . "'";
+//    $result = mysqli_query($db, $sql);
+//    $userArray = mysqli_fetch_assoc($result);
+//    $userKp = $userArray['kp_user'];
+
+    $sql = "SELECT * FROM requests ";
+    $sql .= "WHERE responsible = " . $userkp;
+    $sql .= " AND ( status = 2";
+    $sql .= " OR status = 3 )";
+    $result = mysqli_query($db, $sql);
+//    $requestArray = mysqli_fetch_assoc($result);
+    if($result->num_rows == 0) {
+        return false;
+    } else {
+        return $result;
+    }
+}
+
 function find_request_by_kp($key) {
 	global $db;
 	$sql = "SELECT * FROM requests ";

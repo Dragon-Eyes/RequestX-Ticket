@@ -55,8 +55,26 @@ function find_user_by_nameuser($name_user) {
 	$sql .= "WHERE name_user = '" . $name_user . "' ";
 //	$sql .= "AND flg_active = 1";
 	$result = mysqli_query($db, $sql);
-	$request = mysqli_fetch_assoc($result);
-	return $request;
+	if($result->num_rows == 0) {
+	    return false;
+    } else {
+        $request = mysqli_fetch_assoc($result);
+        return $request;
+    }
+}
+
+function find_userkp_by_nameuser($name_user) {
+    global $db;
+    $sql = "SELECT kp_user FROM users ";
+    $sql .= "WHERE name_user = '" . $name_user . "' ";
+//	$sql .= "AND flg_active = 1";
+    $result = mysqli_query($db, $sql);
+    if($result->num_rows == 0) {
+        return false;
+    } else {
+        $request = mysqli_fetch_assoc($result);
+        return $request;
+    }
 }
 
 function find_user_by_apikey($apikey) {

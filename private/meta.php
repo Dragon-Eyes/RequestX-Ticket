@@ -1,5 +1,5 @@
 <?php
 
-    define("REQX_VERSION", '1.6.0');
-    define("REQX_RELEASENO", '101');
-    define("REQX_RELEASEDATE", '2019-10-19');
+    define("REQX_VERSION", '1.6.1');
+    define("REQX_RELEASENO", '102');
+    define("REQX_RELEASEDATE", '2019-10-20');
