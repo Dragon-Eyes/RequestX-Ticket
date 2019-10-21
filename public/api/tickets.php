@@ -1,10 +1,13 @@
 <?php require_once('../../private/initialize.php');
 
-header("Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With");
+//header("Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Authorization, Accept");
 // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-header("Access-Control-Allow-Methods: GET");
-header('Access-Control-Allow-Origin: *');
+// header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Methods: OPTIONS, GET");
+header('Access-Control-Allow-Origin: https://jstests.dragoneyes.software');
 header('Content-Type: application/json');
+// header('Content-Type: text/plain');
 // header("WWW-Authenticate: Basic realm=\"My Realm\"");
 
 if(!FEATURE_API) {
@@ -13,6 +16,10 @@ if(!FEATURE_API) {
         "success" => false,
         "message" => "Service not enabled"
     ));
+    exit();
+}
+
+if($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
     exit();
 }
 
