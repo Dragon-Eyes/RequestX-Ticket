@@ -64,8 +64,9 @@ class Mail {
         // create record
         $curl = curl_init();
         $bodytext = str_replace("\n", "\\n", $this->body);
+        $bodytext = str_replace("\"", "\\\"", $bodytext);
         $clientsystem = "ReqX Ticket - " . PROJECT;
-        $subject = str_replace("\"", "\\\"", $this->subject);
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://intra.dragoneyes.solutions/fmi/data/v1/databases/CUBApost/layouts/mail/records",
             CURLOPT_RETURNTRANSFER => true,
