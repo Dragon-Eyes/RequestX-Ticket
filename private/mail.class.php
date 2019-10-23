@@ -65,6 +65,7 @@ class Mail {
         $curl = curl_init();
         $bodytext = str_replace("\n", "\\n", $this->body);
         $clientsystem = "ReqX Ticket - " . PROJECT;
+        $subject = str_replace("\"", "\\\"", $this->subject);
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://intra.dragoneyes.solutions/fmi/data/v1/databases/CUBApost/layouts/mail/records",
             CURLOPT_RETURNTRANSFER => true,
@@ -75,6 +76,7 @@ class Mail {
             CURLOPT_CUSTOMREQUEST => "POST",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"some\\nbody\"\n  } \n}",
 //            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"$bodytext\"\n  } \n}",
+        // TODO: escape special characters
             CURLOPT_POSTFIELDS => "{\"fieldData\": {\"ClientSystem\": \"$clientsystem\", \"Recipient\": \"$this->recipient\", \"ReplyTo\": \"$this->replyto\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
             CURLOPT_HTTPHEADER => array(
                 "Content-Type: application/json",
@@ -85,6 +87,9 @@ class Mail {
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
+
+//        $_SESSION['message'] = 'response: ' . print_r($response) . 'error: ' . print_r();
+
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
