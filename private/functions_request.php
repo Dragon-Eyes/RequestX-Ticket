@@ -101,8 +101,10 @@ function insert_request($request) {
 		return $errors;
 	}
 
+    $request['followers'] = $request['source'] . '\n' . $request['responsible'];
+
     $sql = "INSERT INTO requests ";
-    $sql .= "(description, source, entity, category, priority, responsible, status, note, utl_creation_user_kp) ";
+    $sql .= "(description, source, entity, category, priority, responsible, status, note, followers, utl_creation_user_kp) ";
     $sql .= "VALUES (";
     $sql .= "'" . db_escape($db, $request['description']) . "',";
     $sql .= "'" . db_escape($db, $request['source']) . "',";
@@ -112,6 +114,7 @@ function insert_request($request) {
     $sql .= "'" . db_escape($db, $request['responsible']) . "',";
 	$sql .= "'" . db_escape($db, $request['status']) . "',";
 	$sql .= "'" . db_escape($db, $request['note']) . "',";
+    $sql .= "'" . db_escape($db, $request['followers']) . "',";
 	$sql .= "'" . $_SESSION['kp_user'] . "'";
 	$sql .= ")";
     $result = mysqli_query($db, $sql);
@@ -182,4 +185,14 @@ function validate_comment($comment) {
 		$errors[] = "Kommentar kann nicht leer sein";
 	}
 	return $errors;
+}
+
+function get_as_array($linebreaktext) {
+    $array = explode('\n', $linebreaktext);
+    return $array;
+}
+
+function get_as_linebreaktext($array) {
+    $linebreaktext = implode('\n', $array);
+    return $linebreaktext;
 }

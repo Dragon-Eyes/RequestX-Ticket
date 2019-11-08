@@ -9,6 +9,7 @@ CREATE TABLE requests (
   responsible INT(6) UNSIGNED,
   status INT(6) UNSIGNED,
   note VARCHAR(4095),
+  followers VARCHAR(63),
 
   flg_deleted BIT(1) DEFAULT 0,
   flg_archived BIT(1) DEFAULT 0,
@@ -22,9 +23,10 @@ CREATE TABLE requests (
 );
 ------------------------------------------------------
 
-After 1.2.5:
 ALTER TABLE requests ADD COLUMN priority INT(6) UNSIGNED DEFAULT 31;
 
+after 1.6.6
+ALTER TABLE requests ADD COLUMN followers VARCHAR(63);
 
 ------------------------------------------------------ Tests:
 ALTER TABLE requests AUTO_INCREMENT=1000;

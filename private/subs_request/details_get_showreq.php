@@ -1,7 +1,16 @@
 			<?php
 				$key = $_GET['key'];
             $request = find_request_by_kp($key);
-         ?>
+            $request['followers'] = get_as_array($request['followers']);
+
+//            echo '<pre>';
+//            print_r($request);
+//            echo '</pre>';
+
+            // TODO: show checkbox-set for all users
+            // TODO: update function for followers
+
+            ?>
 	
 				<a href="index">Liste&nbsp;&raquo;</a><br>
             <?php // TODO: create root constants ?>
