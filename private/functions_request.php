@@ -80,6 +80,13 @@ function find_request_by_kp($key) {
 	$sql .= "AND flg_deleted = 0";
 	$result = mysqli_query($db, $sql);
 	$request = mysqli_fetch_assoc($result);
+
+	$request['followers'] = explode(',', $request['followers']);
+	// echo '<pre>';
+	// print_r($request);
+	// echo '</pre>';
+	// exit();
+
 	return $request;
 }
 
@@ -101,7 +108,7 @@ function insert_request($request) {
 		return $errors;
 	}
 
-    $request['followers'] = $request['source'] . '\n' . $request['responsible'];
+    $request['followers'] = $request['source'] . ',' . $request['responsible'];
 
     $sql = "INSERT INTO requests ";
     $sql .= "(description, source, entity, category, priority, responsible, status, note, followers, utl_creation_user_kp) ";
@@ -148,8 +155,10 @@ function update_request($request) {
 	if(!empty($errors)) {
 		return $errors;
 	}
-	
-	$sql = "UPDATE requests SET ";
+
+    $request['followers'] = $request['source'] . ',' . $request['responsible'];
+
+    $sql = "UPDATE requests SET ";
 	$sql .= "description='" . db_escape($db, $request['description']) . "', ";
 	$sql .= "source='" . db_escape($db, $request['source']) . "', ";
 	$sql .= "entity='" . db_escape($db, $request['entity']) . "', ";
@@ -158,6 +167,7 @@ function update_request($request) {
 	$sql .= "responsible='" . db_escape($db, $request['responsible']) . "', ";
 	$sql .= "status='" . db_escape($db, $request['status']) . "', ";
 	$sql .= "note='" . db_escape($db, $request['note']) . "', ";
+    $sql .= "followers='" . db_escape($db, $request['followers']) . "', ";
 	$sql .= "utl_modification_user_kp='" . $_SESSION['kp_user'] . "' ";
 
 

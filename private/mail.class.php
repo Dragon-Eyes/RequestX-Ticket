@@ -64,6 +64,7 @@ class Mail {
         // create record
         $curl = curl_init();
         $bodytext = str_replace("\n", "\\n", $this->body);
+        $bodytext = str_replace("\r", "", $bodytext);
         $bodytext = str_replace("\"", "\\\"", $bodytext);
         $clientsystem = "ReqX Ticket - " . PROJECT;
 

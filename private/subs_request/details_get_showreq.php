@@ -1,7 +1,7 @@
 			<?php
 				$key = $_GET['key'];
             $request = find_request_by_kp($key);
-            $request['followers'] = get_as_array($request['followers']);
+            // $request['followers'] = get_as_array($request['followers']);
 
 //            echo '<pre>';
 //            print_r($request);
