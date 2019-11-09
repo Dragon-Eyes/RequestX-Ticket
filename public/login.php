@@ -28,7 +28,10 @@
 
 </head>
 <body>
-<?php require_once('../private/initialize.php'); ?>
+<?php
+    require_once('../private/initialize.php');
+    if (!isset($_SESSION['copy'])) setLanguage('de');
+?>
     <style>
         body {
             margin: 0;
@@ -122,20 +125,20 @@
 
         <form action="<?php echo 'login'; ?>" method="post">
             <dl>
-                <dt>Benutzername</dt>
+                <dt><?php echo $_SESSION['copy']['username']; ?></dt>
                 <dd>
                     <?php if(is_blank($usernameAttempted)) { $usernameAttempted = $_COOKIE['username']; } ?>
                     <input type="text" name="name_user" value="<?php echo $usernameAttempted; ?>" <?php if(is_blank($usernameAttempted)) { echo 'autofocus'; } ?>>
                 </dd>
             </dl>
             <dl>
-                <dt>Passwort</dt>
+                <dt><?php echo $_SESSION['copy']['password']; ?></dt>
                 <dd>
                     <input type="password" name="password" id="userpw" <?php if(!is_blank($usernameAttempted)) { echo 'autofocus'; } ?>>
                 </dd>
             </dl>
             <div style="display: block; clear: left; padding: 30px 0 0 165px;">
-                <input type="checkbox" onclick="showpw()">Passwort anzeigen
+                <input type="checkbox" onclick="showpw()"><?php echo $_SESSION['copy']['passwordShow']; ?>
                 <script>
                     function showpw() {
                         var x = document.getElementById("userpw");
@@ -148,12 +151,12 @@
                 </script>
             </div>
             <div style="display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
-                <input type="submit" value="Einloggen" />
+                <input type="submit" value="<?php echo $_SESSION['copy']['login']; ?>" />
             </div>
 
         </form>
 
-        <p>Gross- und Kleinschreibung werden beim Passwort unterschieden.</p>
+        <p><?php echo $_SESSION['copy']['loginHint']; ?></p>
     </div>
 
     <footer id="pagecontainerfooter">

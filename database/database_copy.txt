@@ -1,0 +1,25 @@
+CREATE TABLE copy (
+  key_copy INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  object VARCHAR(127),
+  en VARCHAR(255),
+  de VARCHAR(255),
+
+  PRIMARY KEY (key_copy)
+);
+
+------------------------------------------------------
+
+  creation_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  creation_userkey INT(6) UNSIGNED,
+  modification_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  modification_userkey INT(6) UNSIGNED,
+
+------------------------------------------------------
+
+INSERT INTO copy (object, en, de) VALUES ('languageAbbr', 'EN', 'DE');
+INSERT INTO copy (object, en, de) VALUES ('username', 'Username', 'Benutzername');
+INSERT INTO copy (object, en, de) VALUES ('password', 'Password', 'Passwort');
+INSERT INTO copy (object, en, de) VALUES ('passwordShow', 'Show password', 'Password anzeigen');
+INSERT INTO copy (object, en, de) VALUES ('login', 'Login', 'Einloggen');
+INSERT INTO copy (object, en, de) VALUES ('loginHint', 'Upper / lower case is differentiated for the password.', 'Gross- und Kleinschreibung werden beim Passwort unterschieden.');
