@@ -31,6 +31,15 @@
 <?php
     require_once('../private/initialize.php');
     if (!isset($_SESSION['copy'])) setLanguage('de');
+    if ($_GET['language'] == 'DE') {
+        setLanguage('de');
+        header("Location: https://" . SUBDOMAIN . ".requestx.ch/login");
+        exit();
+    } elseif ($_GET['language'] == 'EN') {
+        setLanguage('EN');
+        header("Location: https://" . SUBDOMAIN . ".requestx.ch/login");
+        exit();
+    }
 ?>
     <style>
         body {
@@ -46,6 +55,10 @@
     </div>
 
     <div id="pagecontainercontent" style="max-width: 450px; padding-top: 100px;">
+        <a href="login.php?language=<?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?>">
+            <button type="button"><?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?></button>
+        </a>
+
         <?php
         $usernameAttempted = '';
 
