@@ -51,13 +51,15 @@
 <div id="pagecontainer">
     <div id="pagecontainerheader">
         <h1>Request X - <?php echo PROJECT; ?></h1>
-        <p>Version <?php echo REQX_VERSION; ?> (<?php echo REQX_RELEASENO; ?>)</p>
+        <div>
+            <p>Version <?php echo REQX_VERSION; ?> (<?php echo REQX_RELEASENO; ?>)</p>
+            <a href="login.php?language=<?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?>">
+                <button type="button" class="button buttonsetting"><?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?></button>
+            </a>
+        </div>
     </div>
 
     <div id="pagecontainercontent" style="max-width: 450px; padding-top: 100px;">
-        <a href="login.php?language=<?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?>">
-            <button type="button"><?php echo $_SESSION['copy']['languageAbbr'] == 'EN' ? 'DE' : 'EN'; ?></button>
-        </a>
 
         <?php
         $usernameAttempted = '';

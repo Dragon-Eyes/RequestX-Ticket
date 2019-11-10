@@ -2,6 +2,7 @@
 	@pagefooterheight: 40px;
 	@pageheaderheight: 60px;
 	@pagemaxwidth: 1600px;
+	@textcolor: #323232;
 
 	body {
 		text-align: left;
@@ -62,6 +63,24 @@
 	dd > select {
 		font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
 		font-size: 0.9em;
+	}
+	.button {
+		background-color: darkgray;
+		border: none;
+		color: @textcolor;
+		padding: 10px 15px;
+		text-align: center;
+		font-size: 14px;
+		cursor: pointer;
+	}
+	.buttonprimary {
+		background-color: red;
+	}
+	.buttonnavigation {
+		background-color: blue;
+	}
+	.buttonsetting {
+		background-color: darkgray;
 	}
 	.center {
 		text-align: center;

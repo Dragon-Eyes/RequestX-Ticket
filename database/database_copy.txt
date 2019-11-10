@@ -1,7 +1,7 @@
 CREATE TABLE copy (
   key_copy INT(6) UNSIGNED NOT NULL AUTO_INCREMENT,
 
-  object VARCHAR(127),
+  object VARCHAR(127) NOT NULL UNIQUE,
   en VARCHAR(255),
   de VARCHAR(255),
 
@@ -15,6 +15,9 @@ CREATE TABLE copy (
   modification_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   modification_userkey INT(6) UNSIGNED,
 
+
+  ALTER TABLE copy MODIFY COLUMN object VARCHAR(127) NOT NULL UNIQUE;
+
 ------------------------------------------------------
 
 INSERT INTO copy (object, en, de) VALUES ('languageAbbr', 'EN', 'DE');
@@ -22,4 +25,18 @@ INSERT INTO copy (object, en, de) VALUES ('username', 'Username', 'Benutzername'
 INSERT INTO copy (object, en, de) VALUES ('password', 'Password', 'Passwort');
 INSERT INTO copy (object, en, de) VALUES ('passwordShow', 'Show password', 'Password anzeigen');
 INSERT INTO copy (object, en, de) VALUES ('login', 'Login', 'Einloggen');
+INSERT INTO copy (object, en, de) VALUES ('logout', 'Logout', 'Ausloggen');
 INSERT INTO copy (object, en, de) VALUES ('loginHint', 'Upper / lower case is differentiated for the password.', 'Gross- und Kleinschreibung werden beim Passwort unterschieden.');
+INSERT INTO copy (object, en, de) VALUES ('ticket', 'Ticket', 'Ticket');
+INSERT INTO copy (object, en, de) VALUES ('description', 'Description', 'Beschreibung');
+INSERT INTO copy (object, en, de) VALUES ('requester', 'Requester', 'Anforderer');
+INSERT INTO copy (object, en, de) VALUES ('system', 'System', 'System');
+INSERT INTO copy (object, en, de) VALUES ('category', 'Category', 'Kategorie');
+INSERT INTO copy (object, en, de) VALUES ('priority', 'Priority', 'Priorität');
+INSERT INTO copy (object, en, de) VALUES ('responsible', 'Responsible', 'Umsetzung');
+INSERT INTO copy (object, en, de) VALUES ('status', 'Status', 'Status');
+INSERT INTO copy (object, en, de) VALUES ('details', 'Details', 'Details');
+INSERT INTO copy (object, en, de) VALUES ('user', 'User', 'Benutzer');
+INSERT INTO copy (object, en, de) VALUES ('filter', 'Filter', 'Filter');
+INSERT INTO copy (object, en, de) VALUES ('ticketNew', 'New ticket', 'Neues Ticket');
+INSERT INTO copy (object, en, de) VALUES ('usermanagement', 'User management', 'Benutzer-Verwaltung');
