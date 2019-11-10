@@ -11,7 +11,7 @@ Please also adapt the "SUPPORT_EMAIL" in configuration.php
 E-mail notifications are send
 * when a new ticket is created (to the responsible) and
 * when the status is changed to done (to the requester)
-* when a new comment is created
+* when a new comment is created (without the %%silent%% option)
 
 ## Compatability
 Database tested: MariaDB 10
