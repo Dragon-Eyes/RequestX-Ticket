@@ -12,9 +12,9 @@
 
             ?>
 	
-				<a href="index">Liste&nbsp;&raquo;</a><br>
+				<a href="index"><?php echo $_SESSION['copy']['listShow']; ?>&nbsp;&raquo;</a><br>
             <?php // TODO: create root constants ?>
-				<a href="<?php echo 'details?key=' . $key . '&action=edit'; ?>">Bearbeiten&nbsp;&raquo;</a>
+				<a href="<?php echo 'details?key=' . $key . '&action=edit'; ?>"><?php echo $_SESSION['copy']['edit']; ?>&nbsp;&raquo;</a>
 
 			<?php
 				if(isset($_SESSION['message'])) {
@@ -25,53 +25,53 @@
 
 				<form>
 					<dl>
-						<dt>Ticket</dt>
+						<dt><?php echo $_SESSION['copy']['ticket']; ?></dt>
 						<dd><?php echo h($request['kp_request']); ?></dd>
 					</dl>
 					<dl>
-						<dt>Beschreibung</dt>
+						<dt><?php echo $_SESSION['copy']['description']; ?></dt>
 						<dd>
 							<?php echo h($request['description']); ?>
 						</dd>
 					</dl>
 					<dl>
-						<dt>Anforderung</dt>
+						<dt><?php echo $_SESSION['copy']['requester']; ?></dt>
 						<dd>
 							<?php echo find_userabbr_by_kp(h($request['source'])); ?>
 						</dd>
 					</dl>
 					<dl<?php if(!FEATURE_ENTITIES) {echo ' class="hidden"';} ?>>
-						<dt>System</dt>
+						<dt><?php echo $_SESSION['copy']['system']; ?></dt>
 						<dd>
 							<?php echo find_selectiontext_by_kp(h($request['entity'])); ?>
 						</dd>
 					</dl>
 					<dl>
-						<dt>Kategorie</dt>
+						<dt><?php echo $_SESSION['copy']['category']; ?></dt>
 						<dd>
 							<?php echo find_selectiontext_by_kp(h($request['category'])); ?>
 						</dd>
 					</dl>
                     <dl>
-                        <dt>Priorität</dt>
+                        <dt><?php echo $_SESSION['copy']['priority']; ?></dt>
                         <dd>
                             <?php echo find_selectiontext_by_kp(h($request['priority'])); ?>
                         </dd>
                     </dl>
 					<dl>
-						<dt>Umsetzung</dt>
+						<dt><?php echo $_SESSION['copy']['responsible']; ?></dt>
 						<dd>
 							<?php echo find_userabbr_by_kp(h($request['responsible'])); ?>
 						</dd>
 					</dl>
 					<dl>
-						<dt>Status</dt>
+						<dt><?php echo $_SESSION['copy']['status']; ?></dt>
 						<dd>
 							<?php echo find_selectiontext_by_kp(h($request['status'])); ?>
 						</dd>
 					</dl>
 					<dl>
-						<dt>Details /<br>Kommentar</dt>
+						<dt><?php echo $_SESSION['copy']['details']; ?></dt>
 						<dd style="max-width: 700px;">
 							<?php // echo h($request['note']); ?>
 							<?php echo nl2br(h($request['note'])); ?>
@@ -81,8 +81,8 @@
 
 
             <footer style="font-size: 0.75em; display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
-					Angelegt: <?php echo find_userabbr_by_kp(h($request['utl_creation_user_kp'])); ?> (<?php echo h($request['utl_creation_ts']); ?>)
+                <?php echo $_SESSION['copy']['created']; ?>: <?php echo find_userabbr_by_kp(h($request['utl_creation_user_kp'])); ?> (<?php echo h($request['utl_creation_ts']); ?>)
 					<?php if(isset($request['utl_modification_user_kp'])){
-						echo ' || Zuletzt geändert: ' . find_userabbr_by_kp(h($request['utl_modification_user_kp'])) . ' (' . h($request['utl_modification_ts']) . ')';
+						echo ' || ' . $_SESSION['copy']['modified'] . ': ' . find_userabbr_by_kp(h($request['utl_modification_user_kp'])) . ' (' . h($request['utl_modification_ts']) . ')';
 					} ?>
 				</footer>
