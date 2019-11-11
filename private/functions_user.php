@@ -232,4 +232,17 @@ function require_login() {
 	}
 }
 
+function setLanguage($language="de") {
+    global $db;
+    if ($language == 'de') {
+        $sql = "SELECT object, de AS copy FROM copy";
+    } else {
+        $sql = "SELECT object, en AS copy FROM copy";
+    }
+    $result = mysqli_query($db, $sql);
+    while ($request = mysqli_fetch_assoc($result)) {
+        $_SESSION['copy'][$request['object']] = $request['copy'];
+    }
+}
+
 ?>

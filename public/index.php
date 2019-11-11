@@ -74,8 +74,8 @@
 
     <div class="headerrow">
         <div>
-            <p class="headerelement">Benutzer: <?php echo $_SESSION['name_user'] ?></p>
-            <p id="filterbutton" style="display: inherit" onclick="showFilter()">Filter&nbsp;&raquo;</p>
+            <p class="headerelement"><?php echo $_SESSION['copy']['user']; ?>: <?php echo $_SESSION['name_user'] ?></p>
+            <p id="filterbutton" style="display: inherit" onclick="showFilter()"><?php echo $_SESSION['copy']['filter']; ?>&nbsp;&raquo;</p>
             <form id="filterdetails" style="display: none;" action="index" method="post">Status:
                 <input type="checkbox" name="statusWarten" value="1" <?php if($_SESSION['filter_requeststatus'][1]) {echo 'checked';} ?>> warten
                 <input type="checkbox" name="statusOffen" value="1" <?php if($_SESSION['filter_requeststatus'][2]) {echo 'checked';} ?>> offen
@@ -84,12 +84,12 @@
                 <input type="checkbox" name="statusGeloescht" value="1" <?php if($_SESSION['filter_requeststatus'][28]) {echo 'checked';} ?>> gelöscht
                 <input type="submit" value="filtern">
             </form>
-            <p><a href="details?action=new">Neues Ticket&nbsp;&plus;</a></p>
+            <p><a href="details?action=new"><?php echo $_SESSION['copy']['ticketNew']; ?>&nbsp;&plus;</a></p>
         </div>
 
         <div>
-            <p style="text-align: right"><a href="https://<?php echo SUBDOMAIN; ?>.requestx.ch/logout">Log-out&nbsp;&raquo;</a></p>
-            <p><a href="users/index">Benutzer-Verwaltung&nbsp;&raquo;</a></p>
+            <p style="text-align: right"><a href="https://<?php echo SUBDOMAIN; ?>.requestx.ch/logout"><?php echo $_SESSION['copy']['logout']; ?>&nbsp;&raquo;</a></p>
+            <p><a href="users/index"><?php echo $_SESSION['copy']['usermanagement']; ?>&nbsp;&raquo;</a></p>
         </div>
     </div>
 
@@ -98,18 +98,18 @@
 
 	<table id="reqtable">
 		<tr>
-			<th class="center" onClick="sortTableNumber(0)">Ticket</th>
-			<th onClick="sortTableText(1)">Beschreibung</th>
-			<th onClick="sortTableText(2)">Anforderung</th>
-			<th<?php if(!FEATURE_ENTITIES) {echo ' class="hidden"';} ?> onClick="sortTableText(3)">System</th>
+			<th class="center" onClick="sortTableNumber(0)"><?php echo $_SESSION['copy']['ticket']; ?></th>
+			<th onClick="sortTableText(1)"><?php echo $_SESSION['copy']['description']; ?></th>
+			<th onClick="sortTableText(2)"><?php echo $_SESSION['copy']['requester']; ?></th>
+			<th<?php if(!FEATURE_ENTITIES) {echo ' class="hidden"';} ?> onClick="sortTableText(3)"><?php echo $_SESSION['copy']['system']; ?></th>
 			<th class="hidden">KategoriePos</th>
-			<th onClick="sortTableNumber(4)">Kategorie</th>
+			<th onClick="sortTableNumber(4)"><?php echo $_SESSION['copy']['category']; ?></th>
             <th class="hidden">PrioPos</th>
-            <th onClick="sortTableNumber(6)">Priorität</th>
-			<th onClick="sortTableText(8)">Umsetzung</th>
+            <th onClick="sortTableNumber(6)"><?php echo $_SESSION['copy']['priority']; ?></th>
+			<th onClick="sortTableText(8)"><?php echo $_SESSION['copy']['responsible']; ?></th>
 			<th class="hidden">StatusPos</th>
-			<th onClick="sortTableNumber(9)">Status</th>
-			<th onClick="sortTableText(11)">Details</th>
+			<th onClick="sortTableNumber(9)"><?php echo $_SESSION['copy']['status']; ?></th>
+			<th onClick="sortTableText(11)"><?php echo $_SESSION['copy']['details']; ?></th>
 		<!--	<th>&nbsp;</th> -->
 		</tr>
 		
@@ -139,7 +139,7 @@
 					<td<?php echo ' class="status' . $request['status'] . '"'; ?>><?php echo find_selectiontext_by_kp(h($request['status']));?></td>
 					<td><?php echo h($request['note']); ?></td>
 					<td class="borderless"> <!-- TODO: introduce url_for function -->
-						<a href="<?php echo 'details?key=' . h(u($request['kp_request'])) . '&action=show'; ?>">Details&nbsp;&raquo;</a>
+						<a href="<?php echo 'details?key=' . h(u($request['kp_request'])) . '&action=show'; ?>"><?php echo $_SESSION['copy']['details']; ?>&nbsp;&raquo;</a>
 					</td>
 				</tr>
 

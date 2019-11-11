@@ -1,1 +1,1 @@
-	<p><a href="<?php echo 'details?key=' . $key . '&action=comnew'; ?>">Neuer Kommentar&nbsp;&plus;</a></p>
+	<p><a href="<?php echo 'details?key=' . $key . '&action=comnew'; ?>"><?php echo $_SESSION['copy']['commentNew']; ?>&nbsp;&plus;</a></p>

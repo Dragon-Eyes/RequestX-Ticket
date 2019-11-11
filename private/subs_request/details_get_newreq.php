@@ -1,18 +1,18 @@
-				<a href="index">Abbrechen&nbsp;&raquo;</a>
+				<a href="index"><?php echo $_SESSION['copy']['cancel']; ?>&nbsp;&raquo;</a>
 
 				<form action="<?php echo 'details?action=new'; ?>" method="post">
 					<dl>
-						<dt>Ticket</dt>
-						<dd>(neu)</dd>
+						<dt><?php echo $_SESSION['copy']['ticket']; ?></dt>
+						<dd>(<?php echo $_SESSION['copy']['newLc']; ?>)</dd>
 					</dl>
 					<dl>
-						<dt>Beschreibung</dt>
+						<dt><?php echo $_SESSION['copy']['description']; ?></dt>
 						<dd>
 							<textarea name="description" rows="1" cols="60"></textarea>
 						</dd>
 					</dl>
 					<dl>
-						<dt>Anforderung</dt>
+						<dt><?php echo $_SESSION['copy']['requester']; ?></dt>
 						<dd>
 							<select name="source">
 								<?php
@@ -24,7 +24,7 @@
 						</dd>
 					</dl>
 					<dl<?php if(!FEATURE_ENTITIES) {echo ' class="hidden"';} ?>>
-						<dt>System</dt>
+						<dt><?php echo $_SESSION['copy']['system']; ?></dt>
 						<dd>
 							<select name="entity">
 								<?php
@@ -36,7 +36,7 @@
 						</dd>
 					</dl>
 					<dl>
-						<dt>Kategorie</dt>
+						<dt><?php echo $_SESSION['copy']['category']; ?></dt>
 						<dd>
 							<select name="category" size="4">
 								<?php
@@ -48,7 +48,7 @@
 						</dd>
 					</dl>
                     <dl>
-                        <dt>Priorität</dt>
+                        <dt><?php echo $_SESSION['copy']['priority']; ?></dt>
                         <dd>
                             <select name="priority" size="3">
                                 <?php
@@ -60,7 +60,7 @@
                         </dd>
                     </dl>
 					<dl>
-						<dt>Umsetzung</dt>
+						<dt><?php echo $_SESSION['copy']['responsible']; ?></dt>
 						<dd>
 							<select name="responsible">
 								<?php
@@ -72,7 +72,7 @@
 						</dd>
 					</dl>
 					<dl>
-						<dt>Status</dt>
+						<dt><?php echo $_SESSION['copy']['status']; ?></dt>
 						<dd>
 							<select name="status" size="5">
 								<?php
@@ -84,13 +84,13 @@
 						</dd>
 					</dl>
 					<dl>
-						<dt>Details /<br>Kommentar</dt>
+						<dt><?php echo $_SESSION['copy']['details']; ?></dt>
 						<dd>
 							<textarea name="note" rows="5" cols="60"></textarea>
 						</dd>
 					</dl>
 					<div style="display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
-						<input type="submit" value="Speichern" />
+						<input type="submit" value="<?php echo $_SESSION['copy']['save']; ?>" />
 					</div>
 
 				</form>
