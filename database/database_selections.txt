@@ -3,7 +3,9 @@ CREATE TABLE selections (
 
   list VARCHAR(31),
   position INT(3) UNSIGNED,
-  text VARCHAR(63),
+  xx text VARCHAR(63),
+  text_de VARCHAR(63),
+  text_en VARCHAR(63),
   value VARCHAR(63),
 
   flg_default BIT(1) DEFAULT 0,
@@ -30,7 +32,9 @@ INSERT INTO selections (list, position, text) VALUES ('priority', '1', 'niedrig'
 INSERT INTO selections (list, position, text, flg_default) VALUES ('priority', '2', 'normal', 1);
 INSERT INTO selections (list, position, text) VALUES ('priority', '3', 'hoch');
 
-
+after 1.7.0:
+ALTER TABLE selections ADD COLUMN text_de VARCHAR(63);
+ALTER TABLE selections ADD COLUMN text_en VARCHAR(63);
 
 ------------------------------------------------------ Tests:
 1 2 3 4 28

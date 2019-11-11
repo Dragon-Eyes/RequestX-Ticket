@@ -34,6 +34,20 @@ function find_selectiontext_by_kp($key) {
 	return $text;
 }
 
+function find_selectiontext_by_key($key) {
+    global $db;
+    if ($_SESSION['copy']['languageAbbr'] == 'DE' ) {
+        $sql = "SELECT text_de AS text FROM selections ";
+    } else {
+        $sql = "SELECT text_en AS text FROM selections ";
+    }
+    $sql .= "WHERE kp_selection = '" . $key . "'";
+    $result = mysqli_query($db, $sql);
+    $request = mysqli_fetch_assoc($result);
+    $text = $request['text'];
+    return $text;
+}
+
 function find_selectionposition_by_kp($key) {
 	global $db;
 	$sql = "SELECT position FROM selections ";

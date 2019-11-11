@@ -131,7 +131,7 @@
                     <td
                         <?php if($request['status'] == 2 || $request['status'] == 3) {echo ' class="priority' . $request['priority'] . '"';} ?>
                     >
-                        <?php echo find_selectiontext_by_kp(h($request['priority'])); ?>
+                        <?php echo find_selectiontext_by_key(h($request['priority'])); ?>
                     </td>
 
                     <td><?php echo find_userabbr_by_kp(h($request['responsible'])); ?></td>
