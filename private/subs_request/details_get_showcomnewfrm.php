@@ -15,8 +15,8 @@
                                 <input type="file" name="attachment" id="attachment" accept="image/*">
                             </dd>
                         </dl>
-                                <input type="hidden" name="followers" value="<?php echo implode(',', $request['followers']) ?>">
                         <?php } ?>
+                            <input type="hidden" name="followers" value="<?php echo implode(',', $request['followers']) ?>">
                         <div style="display: block; clear: left; padding: 30px 0 30px 165px;" id="operations">
                             <input type="submit" value="Speichern">
                         </div>
