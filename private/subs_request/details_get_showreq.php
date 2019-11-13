@@ -49,13 +49,13 @@
 					<dl>
 						<dt><?php echo $_SESSION['copy']['category']; ?></dt>
 						<dd>
-							<?php echo find_selectiontext_by_kp(h($request['category'])); ?>
+							<?php echo find_selectiontext_by_key(h($request['category'])); ?>
 						</dd>
 					</dl>
                     <dl>
                         <dt><?php echo $_SESSION['copy']['priority']; ?></dt>
                         <dd>
-                            <?php echo find_selectiontext_by_kp(h($request['priority'])); ?>
+                            <?php echo find_selectiontext_by_key(h($request['priority'])); ?>
                         </dd>
                     </dl>
 					<dl>
@@ -67,7 +67,7 @@
 					<dl>
 						<dt><?php echo $_SESSION['copy']['status']; ?></dt>
 						<dd>
-							<?php echo find_selectiontext_by_kp(h($request['status'])); ?>
+							<?php echo find_selectiontext_by_key(h($request['status'])); ?>
 						</dd>
 					</dl>
 					<dl>

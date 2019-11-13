@@ -2,7 +2,12 @@
 
 function find_selections_by_list($list) {
 	global $db;
-	$sql = "SELECT * FROM selections ";
+    if ($_SESSION['copy']['languageAbbr'] == 'DE' ) {
+        $sql = "SELECT kp_selection, list, position, text_de AS text, value, flg_active, flg_deleted FROM selections ";
+    } else {
+        $sql = "SELECT kp_selection, list, position, text_en AS text, value, flg_active, flg_deleted FROM selections ";
+    }
+    //	$sql = "SELECT * FROM selections ";
 	$sql .= "WHERE list = '" . $list . "' ";
 //	$sql .= "WHERE list = 'category' ";
 	$sql .= "AND flg_active = 1 ";

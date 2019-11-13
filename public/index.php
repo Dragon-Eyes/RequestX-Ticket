@@ -125,7 +125,7 @@
 					<td><?php echo find_userabbr_by_kp(h($request['source'])); ?></td>
 					<td<?php if(!FEATURE_ENTITIES) {echo ' class="hidden"';} ?>><?php echo find_selectiontext_by_kp(h($request['entity'])); ?></td>
 					<td class="hidden"><?php echo find_selectionposition_by_kp(h($request['category'])); ?></td>
-					<td<?php if($request['status'] == 2 && $request['category'] == 5 && $request['priority'] == 32) {echo ' class="alarm"';} ?>><?php echo find_selectiontext_by_kp(h($request['category'])); ?></td>
+					<td<?php if($request['status'] == 2 && $request['category'] == 5 && $request['priority'] == 32) {echo ' class="alarm"';} ?>><?php echo find_selectiontext_by_key(h($request['category'])); ?></td>
                     <td class="hidden"><?php echo find_selectionposition_by_kp(h($request['priority'])); ?></td>
 
                     <td
@@ -136,7 +136,7 @@
 
                     <td><?php echo find_userabbr_by_kp(h($request['responsible'])); ?></td>
 					<td class="hidden"><?php echo find_selectionposition_by_kp(h($request['status'])); ?></td>
-					<td<?php echo ' class="status' . $request['status'] . '"'; ?>><?php echo find_selectiontext_by_kp(h($request['status']));?></td>
+					<td<?php echo ' class="status' . $request['status'] . '"'; ?>><?php echo find_selectiontext_by_key(h($request['status']));?></td>
 					<td><?php echo h($request['note']); ?></td>
 					<td class="borderless"> <!-- TODO: introduce url_for function -->
 						<a href="<?php echo 'details?key=' . h(u($request['kp_request'])) . '&action=show'; ?>"><?php echo $_SESSION['copy']['details']; ?>&nbsp;&raquo;</a>

@@ -10,17 +10,17 @@
 </head>
 <body>
 	<p><a href="../index">Tickets&nbsp;&raquo;</a></p>
-	<p style="text-align: right"><a href="details?action=new">Neuer Benutzer&nbsp;&plus;</a></p>
+	<p style="text-align: right"><a href="details?action=new"><?php echo $_SESSION['copy']['userNew']; ?>&nbsp;&plus;</a></p>
 
 	<table>
 		<tr>
-			<th>Vorname</th>
-			<th>Nachname</th>
-			<th>Abk.</th>
-			<th>Benutzername</th>
-			<th>E-Mail</th>
-			<th>Aktiv</th>
-			<th>Notiz</th>
+			<th><?php echo $_SESSION['copy']['nameFirst']; ?></th>
+			<th><?php echo $_SESSION['copy']['nameLast']; ?></th>
+			<th><?php echo $_SESSION['copy']['nameAbbr']; ?></th>
+			<th><?php echo $_SESSION['copy']['username']; ?></th>
+			<th><?php echo $_SESSION['copy']['email']; ?></th>
+			<th><?php echo $_SESSION['copy']['active']; ?></th>
+			<th><?php echo $_SESSION['copy']['note']; ?></th>
 		<!--	<th>&nbsp;</th> -->
 		</tr>
 		
@@ -38,7 +38,7 @@
 					<td><?php echo h($user['flg_active']); ?></td>
 					<td><?php echo h($user['note']); ?></td>
 					<td class="borderless"> <!-- TODO: introduce url_for function -->
-						<a href="<?php echo 'details?key=' . h(u($user['kp_user'])) . '&action=edit'; ?>">Bearbeiten&nbsp;&raquo;</a>
+						<a href="<?php echo 'details?key=' . h(u($user['kp_user'])) . '&action=edit'; ?>"><?php echo $_SESSION['copy']['edit']; ?>&nbsp;&raquo;</a>
 					</td>
 				</tr>
 

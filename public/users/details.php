@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Requestx | Benutzer-Details</title>
+	<title>Requestx | <?php echo $_SESSION['copy']['userDetails']; ?></title>
     <link rel="canonical" href="https://<?php echo SUBDOMAIN; ?>.requestx.ch/users/details">
 	<link rel="stylesheet" href="../styles/requestx.css">
 </head>

@@ -22,6 +22,16 @@ CREATE TABLE copy (
 
 INSERT INTO copy (object, en, de) VALUES ('languageAbbr', 'EN', 'DE');
 INSERT INTO copy (object, en, de) VALUES ('username', 'Username', 'Benutzername');
+
+INSERT INTO copy (object, en, de) VALUES ('nameFirst', 'First name', 'Vorname');
+INSERT INTO copy (object, en, de) VALUES ('nameLast', 'Last name', 'Nachname');
+INSERT INTO copy (object, en, de) VALUES ('nameAbbr', 'Abbr.', 'Abk.');
+INSERT INTO copy (object, en, de) VALUES ('email', 'Email', 'E-Mail');
+INSERT INTO copy (object, en, de) VALUES ('active', 'active', 'aktiv');
+INSERT INTO copy (object, en, de) VALUES ('note', 'Note', 'Notiz');
+INSERT INTO copy (object, en, de) VALUES ('userNew', 'New user', 'Neuer Benutzer');
+INSERT INTO copy (object, en, de) VALUES ('userDetails', 'User details', 'Benutzer-Details');
+
 INSERT INTO copy (object, en, de) VALUES ('password', 'Password', 'Passwort');
 INSERT INTO copy (object, en, de) VALUES ('passwordShow', 'Show password', 'Password anzeigen');
 INSERT INTO copy (object, en, de) VALUES ('login', 'Login', 'Einloggen');
