@@ -18,6 +18,15 @@ function find_all_active_userkeys() {
 	return $result;
 }
 
+function find_all_active_usernames() {
+    global $db;
+    $sql = "SELECT kp_user, name_user FROM users ";
+    $sql .= "WHERE flg_active = 1 ";
+    $sql .= "ORDER BY name_user ASC";
+    $result = mysqli_query($db, $sql);
+    return $result;
+}
+
 function find_user_by_kp($key) {
 	global $db;
 	$sql = "SELECT * FROM users ";
@@ -36,6 +45,16 @@ function find_userabbr_by_kp($key) {
 	$request = mysqli_fetch_assoc($result);
 	$userabbr = $request['name_abbr'];
 	return $userabbr;
+}
+
+function find_username_by_kp($key) {
+    global $db;
+    $sql = "SELECT name_user FROM users ";
+    $sql .= "WHERE kp_user = " . $key;
+    $result = mysqli_query($db, $sql);
+    $request = mysqli_fetch_assoc($result);
+    $username = $request['name_user'];
+    return $username;
 }
 
 function find_useremail_by_kp($key) {

@@ -156,7 +156,8 @@ function update_request($request) {
 		return $errors;
 	}
 
-    $request['followers'] = $request['source'] . ',' . $request['responsible'];
+//    $request['followers'] = $request['source'] . ',' . $request['responsible'];
+    $request['followersstring'] = implode(',', $request['followers']);
 
     $sql = "UPDATE requests SET ";
 	$sql .= "description='" . db_escape($db, $request['description']) . "', ";
@@ -167,7 +168,7 @@ function update_request($request) {
 	$sql .= "responsible='" . db_escape($db, $request['responsible']) . "', ";
 	$sql .= "status='" . db_escape($db, $request['status']) . "', ";
 	$sql .= "note='" . db_escape($db, $request['note']) . "', ";
-    $sql .= "followers='" . db_escape($db, $request['followers']) . "', ";
+    $sql .= "followers='" . db_escape($db, $request['followersstring']) . "', ";
 	$sql .= "utl_modification_user_kp='" . $_SESSION['kp_user'] . "' ";
 
 
@@ -205,4 +206,23 @@ function get_as_array($linebreaktext) {
 function get_as_linebreaktext($array) {
     $linebreaktext = implode('\n', $array);
     return $linebreaktext;
+}
+
+function get_followersNames_by_followerKeys($followerKeys) {
+    // move to functions_user ?
+    global $db;
+    // $followerKeysArray = explode(',', $followerKeys);
+    // print_r($followerKeys); exit();
+    $usernameList = '';
+    foreach ($followerKeys as $followerKey) {
+        // request username
+        $sql = 'SELECT name_user FROM users';
+        $sql .= ' WHERE kp_user = ' . $followerKey;
+        $result = mysqli_query($db, $sql);
+        if ($result) {
+            $username = mysqli_fetch_assoc($result);
+            $usernameList .= $username['name_user'] . ', ';
+        }
+    }
+    return substr($usernameList, 0, -2);
 }

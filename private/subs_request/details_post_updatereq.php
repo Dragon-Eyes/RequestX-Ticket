@@ -16,6 +16,9 @@
 			$request['responsible'] = $_POST['responsible'] ?? '';
 			$request['status'] = $_POST['status'] ?? '';
 			$request['note'] = $_POST['note'] ?? '';
+			$request['followers'] = $_POST['followers'];
+
+//			print_r($_POST['followers']); exit();
 
                 // get old version
                 $requestOld = find_request_by_kp($key);

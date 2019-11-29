@@ -77,6 +77,14 @@
 							<?php echo nl2br(h($request['note'])); ?>
 						</dd>
 					</dl>
+                    <dl>
+                        <dt><?php echo $_SESSION['copy']['followers']; ?></dt>
+                        <?php // print_r($request['followers']); ?>
+                        <?php $followernames = get_followersNames_by_followerKeys($request['followers']); ?>
+                        <dd>
+                            <?php echo h($followernames); ?>
+                        </dd>
+                    </dl>
 				</form>
 
 

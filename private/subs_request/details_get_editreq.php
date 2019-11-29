@@ -101,6 +101,18 @@
 							<textarea name="note" rows="5" cols="60"><?php echo h($request['note']); ?></textarea>
 						</dd>
 					</dl>
+                    <dl>
+                        <dt><?php echo $_SESSION['copy']['followers']; ?></dt>
+                        <dd>
+                            <?php $user_set = find_all_active_usernames(); ?>
+                            <select name="followers[]" multiple size="<?php echo mysqli_num_rows($user_set) ?>">
+                                <?php
+                                while ($user = mysqli_fetch_assoc($user_set)) { ?>
+                                    <option value="<?php echo h($user['kp_user']); ?>"<?php if(in_array(h($user['kp_user']), $request['followers'])) { echo ' selected'; } ?>><?php echo h($user['name_user']); ?></option>
+                                <?php } ?>
+                            </select>
+                        </dd>
+                    </dl>
 					<div style="display: block; clear: left; padding: 30px 0 0 165px;" id="operations">
 						<input type="submit" value="<?php echo $_SESSION['copy']['save']; ?>" />
 					</div>

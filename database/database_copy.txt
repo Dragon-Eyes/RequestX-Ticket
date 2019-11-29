@@ -61,3 +61,5 @@ INSERT INTO copy (object, en, de) VALUES ('andorAttachment', 'and / or attachmen
 INSERT INTO copy (object, en, de) VALUES ('save', 'Save', 'Speichern');
 INSERT INTO copy (object, en, de) VALUES ('newLc', 'new', 'neu');
 INSERT INTO copy (object, en, de) VALUES ('cancel', 'Cancel', 'Abbrechen');
+
+INSERT INTO copy (object, en, de) VALUES ('followers', 'Followers', 'Benachrichtigte');
