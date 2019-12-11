@@ -20,6 +20,11 @@
     $commenttext = trim($_POST['comment']);
 
     if (!is_blank($commenttext)) {
+        // checks no email reply
+        if (strpos($commenttext, '%%noemailreply%%') !== false) {
+            $noemailreply = true;
+            $commenttext = str_replace('%%noemailreply%%', '', $commenttext);
+        }
         // checks silent instruction
         if (strpos($commenttext, '%%silent%%') !== false) {
             $silent = true;
@@ -52,7 +57,7 @@
                     if (FEATURE_MESSAGESERVICE) {
                         $mail = new Mail();
                         $mail->recipient = $recipients;
-                        $mail->replyto = $sender['email'];
+                        $mail->replyto = $noemailreply ? 'noemailreply@requestx.ch' : $sender['email'];
                         $mail->subject = "Neuer Kommentar [" . SUBDOMAIN . " " . $comment['key'] . "]";
                         $mail->body = htmlspecialchars($comment['comment']) . "\n\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $comment['key'] . "&action=show";
                         $mail->send();
