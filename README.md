@@ -13,6 +13,8 @@ E-mail notifications are send
 * when the status is changed to done (to the requester)
 * when a new comment is created (without the %%silent%% option)
 
+If the %%noemailreply%% option is added into the comment, a non-existing email is used instead of the email address of the comment creator.
+
 ## Compatability
 Database tested: MariaDB 10
 
