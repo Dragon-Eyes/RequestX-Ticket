@@ -26,10 +26,8 @@ class Mail {
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-            // print_r($response); echo "<hr>";
             $responseObject = json_decode($response);
             $token = $responseObject->response->token;
-            // echo $token;
             return $token;
         }
     }
@@ -56,11 +54,6 @@ class Mail {
     public function send() {
         $apikey = $this->apiConnectionOpen();
 
-//        echo $apikey;
-//        echo '<pre>';
-//        print_r($this);
-//        echo '</pre>';
-
         // create record
         $curl = curl_init();
         $bodytext = str_replace("\n", "\\n", $this->body);
@@ -76,8 +69,6 @@ class Mail {
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-//            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"some\\nbody\"\n  } \n}",
-//            CURLOPT_POSTFIELDS => "{\"fieldData\": \n  { \n  \t\"Recipient\": \"$this->recipient\",\n  \t\"Subject\": \"$this->subject\",\n  \t\"Body\": \"$bodytext\"\n  } \n}",
         // TODO: escape special characters
             CURLOPT_POSTFIELDS => "{\"fieldData\": {\"ClientSystem\": \"$clientsystem\", \"Recipient\": \"$this->recipient\", \"ReplyTo\": \"$this->replyto\", \"Subject\": \"$this->subject\", \"Body\": \"$bodytext\" } }",
             CURLOPT_HTTPHEADER => array(
@@ -89,18 +80,12 @@ class Mail {
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-
-//        $_SESSION['message'] = 'response: ' . print_r($response) . 'error: ' . print_r();
-
         if ($err) {
             echo "cURL Error #:" . $err;
         } else {
-//            echo $response;
             $responseObject = json_decode($response);
             $error = $responseObject->message->code;
         }
-
-        // TODOne: only if ok message from creation
         if($error == 0) {
             // trigger send-script
             $curl = curl_init();
@@ -125,7 +110,6 @@ class Mail {
             if ($err) {
                 echo "cURL Error #:" . $err;
             } else {
-//            echo $response;
                 $responseObject = json_decode($response);
                 $error = $responseObject->message->code;
             }
@@ -140,6 +124,5 @@ class Mail {
 
 
         $this->apiConnectionClose($apikey);
-//        exit();
     }
 }
