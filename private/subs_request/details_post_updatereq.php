@@ -49,8 +49,8 @@
                         }
                     }
 
-					if(FEATURE_NOTIFICATIONS && $request['status'] == 4 && $statusOld != 4) {
-                        // send mail to requester if status changes to erledigt
+					if( FEATURE_NOTIFICATIONS && $request['status'] != $statusOld ) {
+                        // send mail to requester if status changes to anything
                         $to = find_useremail_by_kp($request['source']);
                         $sender = find_useremail_by_kp($request['responsible']);
                         if(isset($to)) {
@@ -58,11 +58,11 @@
                                 $mail = new Mail();
                                 $mail->recipient = $to;
                                 $mail->replyto = $sender;
-                                $mail->subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
+                                $mail->subject = "[" . SUBDOMAIN . " " . $key . "] neuer Status: " . find_selectiontext_by_key($request['status']);
                                 $mail->body = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
                                 $mail->send();
                             } else {
-                                $subject = "Ticket [" . SUBDOMAIN . " " . $key . "] erledigt";
+                                $subject = "[" . SUBDOMAIN . " " . $key . "] neuer Status: " . find_selectiontext_by_key($request['status']);
                                 $message = $request['description'] . "\nhttps://" . SUBDOMAIN . ".requestx.ch/details?key=" . $key . "&action=show";
                                 // $headers = "From: Request X <benachrichtigung@requestx.ch>\r\n";
                                 $headers = 'From: Request X <benachrichtigung@requestx.ch>' . "\r\n";

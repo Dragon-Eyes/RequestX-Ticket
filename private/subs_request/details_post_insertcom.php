@@ -63,7 +63,7 @@
                         $mail = new Mail();
                         $mail->recipient = $recipients;
                         $mail->replyto = $noemailreply ? 'noemailreply@requestx.ch' : $sender['email'];
-                        $mail->subject = "Neuer Kommentar [" . SUBDOMAIN . " " . $comment['key'] . "]";
+                        $mail->subject = "[" . SUBDOMAIN . " " . $comment['key'] . "] neuer Kommentar";
                         if($noemailbody) {
                             $mail->body = "https://" . SUBDOMAIN . ".requestx.ch/details?key=" . $comment['key'] . "&action=show";
                         } else {
